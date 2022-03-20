@@ -31,102 +31,102 @@ always @(*) begin
     case(Instruction[31:26])
     6'b100011:      //this is load word case
                 begin
-                    Jump    <= 0;
-                    ALUOp   <= 2'b0;
-                    MemWrite<= 0;
-                    RegWrite<= 1;
-                    RegDst  <= 0;
-                    ALUSrc  <= 1;
-                    MemtoReg<= 1;
-                    Branch  <= 0;
+                    Jump    = 0;
+                    ALUOp   = 2'b0;
+                    MemWrite= 0;
+                    RegWrite= 1;
+                    RegDst  = 0;
+                    ALUSrc  = 1;
+                    MemtoReg= 1;
+                    Branch  = 0;
                 end
     6'b101011:      //store word case
                 begin
-                    Jump    <= 0;
-                    ALUOp   <= 2'b0;
-                    MemWrite<= 1;
-                    RegWrite<= 0;
-                    RegDst  <= 0;
-                    ALUSrc  <= 1;
-                    MemtoReg<= 1;
-                    Branch  <= 0;
+                    Jump    = 0;
+                    ALUOp   = 2'b0;
+                    MemWrite= 1;
+                    RegWrite= 0;
+                    RegDst  = 0;
+                    ALUSrc  = 1;
+                    MemtoReg= 1;
+                    Branch  = 0;
                 end
     6'b000000:      //rtype case
                 begin
-                    Jump    <= 0;
-                    ALUOp   <= 2'b10;
-                    MemWrite<= 0;
-                    RegWrite<= 1;
-                    RegDst  <= 1;
-                    ALUSrc  <= 0;
-                    MemtoReg<= 0;
-                    Branch  <= 0;
+                    Jump    = 0;
+                    ALUOp   = 2'b10;
+                    MemWrite= 0;
+                    RegWrite= 1;
+                    RegDst  = 1;
+                    ALUSrc  = 0;
+                    MemtoReg= 0;
+                    Branch  = 0;
                 end
     6'b001000:      //addImmediate case
                 begin
-                    Jump    <= 0;
-                    ALUOp   <= 2'b0;
-                    MemWrite<= 0;
-                    RegWrite<= 1;
-                    RegDst  <= 0;
-                    ALUSrc  <= 1;
-                    MemtoReg<= 0;
-                    Branch  <= 0;
+                    Jump    = 0;
+                    ALUOp   = 2'b0;
+                    MemWrite= 0;
+                    RegWrite= 1;
+                    RegDst  = 0;
+                    ALUSrc  = 1;
+                    MemtoReg= 0;
+                    Branch  = 0;
                 end
     6'b000100:      //branch if equal case
                 begin
-                    Jump    <= 0;
-                    ALUOp   <= 2'b01;
-                    MemWrite<= 0;
-                    RegWrite<= 0;
-                    RegDst  <= 0;
-                    ALUSrc  <= 0;
-                    MemtoReg<= 0;
-                    Branch  <= 1;
+                    Jump    = 0;
+                    ALUOp   = 2'b01;
+                    MemWrite= 0;
+                    RegWrite= 0;
+                    RegDst  = 0;
+                    ALUSrc  = 0;
+                    MemtoReg= 0;
+                    Branch  = 1;
                 end
     6'b000010:      //jump instruction case
                 begin
-                    Jump    <= 1;
-                    ALUOp   <= 2'b0;
-                    MemWrite<= 0;
-                    RegWrite<= 0;
-                    RegDst  <= 0;
-                    ALUSrc  <= 0;
-                    MemtoReg<= 0;
-                    Branch  <= 0;
+                    Jump    = 1;
+                    ALUOp   = 2'b0;
+                    MemWrite= 0;
+                    RegWrite= 0;
+                    RegDst  = 0;
+                    ALUSrc  = 0;
+                    MemtoReg= 0;
+                    Branch  = 0;
                 end
     default:
                 begin
-                    Jump    <= 0;
-                    ALUOp   <= 2'b0;
-                    MemWrite<= 0;
-                    RegWrite<= 0;
-                    RegDst  <= 0;
-                    ALUSrc  <= 0;
-                    MemtoReg<= 0;
-                    Branch  <= 0;
+                    Jump    = 0;
+                    ALUOp   = 2'b0;
+                    MemWrite= 0;
+                    RegWrite= 0;
+                    RegDst  = 0;
+                    ALUSrc  = 0;
+                    MemtoReg= 0;
+                    Branch  = 0;
                 end
     endcase
     if (ALUOp == 2'b10) begin
         case (Instruction[5:0])
             6'b100000:  //addition function
-                ALUControl  <= 3'b010;
+                ALUControl  = 3'b010;
             6'b100010:  //subtraction function
-                ALUControl  <= 3'b100;
+                ALUControl  = 3'b100;
             6'b101010:  //SLT function
-                ALUControl  <= 3'b110;
+                ALUControl  = 3'b110;
             6'b011100:  //multiplication function
-                ALUControl  <= 3'b101;
+                ALUControl  = 3'b101;
             default:
-                ALUControl  <= 3'b010;
+                ALUControl  = 3'b010;
         endcase
     end
     else if (ALUOp == 2'b00)
-        ALUControl  <= 3'b010;
+        ALUControl  = 3'b010;
     else if (ALUOp == 2'b01)
-        ALUControl  <= 3'b100;
+        ALUControl  = 3'b100;
     else
-        ALUControl  <= 3'b010;
+        ALUControl  = 3'b010;
 end
     
 endmodule
